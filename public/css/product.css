@@ -2,11 +2,13 @@
     width: 20rem;
     max-width: 90%;
     margin: auto;
+    display: block;
 }
 
 .product-item {
     width: 20rem;
     max-width: 95%;
+    margin: 1rem;
 }
 
 .product__title {
@@ -22,12 +24,4 @@
 
 .product__description {
     text-align: center;
-}
-
-.card__actions a,
-.card__actions button {
-    display: block;
-    width: 100%;
-    padding: 8px 20px;
-    margin: 5px 0;
 }

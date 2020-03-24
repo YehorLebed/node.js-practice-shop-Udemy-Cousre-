@@ -1,34 +1,32 @@
 const Product = require('../models/product');
 const Cart = require('../models/cart');
 
-exports.getProducts = (req, res, next) => {
-  Product.fetchAll(products => {
-    res.render('shop/product-list', {
-      prods: products,
-      pageTitle: 'All Products',
-      path: '/products'
-    });
+exports.getProducts = async (req, res, next) => {
+  const [rows, fieldData] = await Product.fetchAll();
+  res.render('shop/product-list', {
+    prods: rows,
+    pageTitle: 'All Products',
+    path: '/products'
   });
 };
 
-exports.getProduct = (req, res, next) => {
+exports.getProduct = async (req, res, next) => {
   const productId = req.params.id;
-  Product.fetchProductById(productId, product => {
-    res.render('shop/product-detail', {
-      product,
-      pageTitle: product.name,
-      path: `/products`
-    })
+  const result = await Product.fetchProductById(productId);
+  const product = result[0][0];
+  res.render('shop/product-detail', {
+    product,
+    pageTitle: product.name,
+    path: `/products`
   })
 }
 
-exports.getIndex = (req, res, next) => {
-  Product.fetchAll(products => {
-    res.render('shop/index', {
-      prods: products,
-      pageTitle: 'Shop',
-      path: '/'
-    });
+exports.getIndex = async (req, res, next) => {
+  const [rows, fieldData] = await Product.fetchAll();
+  res.render('shop/index', {
+    prods: rows,
+    pageTitle: 'Shop',
+    path: '/'
   });
 };
 
